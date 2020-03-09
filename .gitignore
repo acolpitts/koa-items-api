@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+
+# DB
+test.sqlite3
+dev.sqlite3
+
+# Misc
+.DS_Store
+.idea
+.vscode

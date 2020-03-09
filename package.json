@@ -1,0 +1,22 @@
+{
+  "name": "koa-items-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "db": "node_modules/knex/bin/cli.js",
+    "test": "mocha",
+    "dev": "NODE_ENV=dev nodemon server/index.js"
+  },
+  "author": "Adam Colpitts <adam@completeperspective.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2",
+    "sqlite3": "^4.1.1"
+  },
+  "dependencies": {
+    "knex": "^0.20.11"
+  }
+}
