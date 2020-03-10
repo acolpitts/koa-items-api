@@ -72,7 +72,7 @@ describe("routes: items", () => {
   });
 
   describe(`POST ${PATH}`, () => {
-    it("should return the newly added resource identifier alongside a Location header", done => {
+    it("should return the newly added resource identifier with a Location header", done => {
       chai
         .request(server)
         .post(`${PATH}`)
@@ -87,6 +87,21 @@ describe("routes: items", () => {
           res.type.should.eql("application/json");
           res.body.data.length.should.eql(1);
           res.body.data[0].should.be.a("number");
+          done();
+        });
+    });
+    it("should require valid payload", done => {
+      chai
+        .request(server)
+        .post(`${PATH}`)
+        .send({
+          title: "A test item without column prop"
+        })
+        .end((err, res) => {
+          should.not.exist(err);
+          res.status.should.eql(400);
+          res.type.should.eql("application/json");
+          res.body.error.should.eq('Opps! Something went wrong creating new item.');
           done();
         });
     });

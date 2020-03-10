@@ -46,7 +46,7 @@ const create = async ctx => {
       data: item
     };
   } catch (error) {
-    ctx.status = 409;
+    ctx.status = 400;
     ctx.body = {
       error: "Opps! Something went wrong creating new item."
     };

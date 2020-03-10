@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "db": "node_modules/knex/bin/cli.js",
-    "test": "mocha",
+    "test": "NODE_ENV=test PORT=3333 mocha --watch --recursive",
     "dev": "NODE_ENV=dev nodemon server/index.js"
   },
   "author": "Adam Colpitts <adam@completeperspective.com>",
