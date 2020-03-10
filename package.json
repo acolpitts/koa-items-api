@@ -20,6 +20,7 @@
     "knex": "^0.20.11",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.1",
     "koa-router": "^8.0.8"
   }
 }

@@ -1,6 +1,7 @@
 const env = process.env.NODE_ENV || "test";
 const config = require("../../knexfile")[env];
 const knex = require("knex")(config);
+const { log } = require("../services/loggerService")
 
 const index = async ctx => {
   try {
@@ -40,6 +41,9 @@ const create = async ctx => {
     if (!item.length) {
       throw new Error("The resource already exists");
     }
+    // Log creation event
+    log(ctx, item[0]);
+    // Return successful response
     ctx.status = 201;
     ctx.set("Location", `${ctx.request.URL}/${item[0]}`);
     ctx.body = {
