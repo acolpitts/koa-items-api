@@ -36,6 +36,8 @@ describe("routes: items", () => {
           res.type.should.eql("application/json");
           res.body.data.length.should.eql(5);
           res.body.data[0].should.include.keys("id", "title", "column");
+          res.body.data[0].title.should.equal('item 1');
+          res.body.data[0].column.should.equal(0);
           done();
         });
     });
@@ -60,10 +62,31 @@ describe("routes: items", () => {
         .request(server)
         .get(`${PATH}/9999`)
         .end((err, res) => {
-          should.exist(err);
+          should.not.exist(err);
           res.status.should.eql(404);
           res.type.should.eql("application/json");
           res.body.error.should.eql("The requested resource does not exists");
+          done();
+        });
+    });
+  });
+
+  describe(`POST ${PATH}`, () => {
+    it("should return the newly added resource identifier alongside a Location header", done => {
+      chai
+        .request(server)
+        .post(`${PATH}`)
+        .send({
+          title: "A test item",
+          column: 0
+        })
+        .end((err, res) => {
+          should.not.exist(err);
+          res.status.should.eql(201);
+          res.should.have.header("Location");
+          res.type.should.eql("application/json");
+          res.body.data.length.should.eql(1);
+          res.body.data[0].should.be.a("number");
           done();
         });
     });
