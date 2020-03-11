@@ -63,6 +63,8 @@ const destroy = async ctx => {
     const item = await knex("items")
       .where({ id })
       .del()
+    // Log destroy event
+    log(ctx);  
     ctx.status = 204
     ctx.body = {
       data: [id]
