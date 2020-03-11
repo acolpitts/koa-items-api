@@ -57,4 +57,22 @@ const create = async ctx => {
   };
 };
 
-module.exports = { index, show, create };
+const destroy = async ctx => {
+  try {
+    const { id } = ctx.params;
+    const item = await knex("items")
+      .where({ id })
+      .del()
+    ctx.status = 204
+    ctx.body = {
+      data: [id]
+    };
+  } catch (error) {
+    ctx.status = 404;
+    ctx.body = {
+      error: error.message
+    };
+  }
+};
+
+module.exports = { index, show, create, destroy };

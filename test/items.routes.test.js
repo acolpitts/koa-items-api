@@ -106,4 +106,17 @@ describe("routes: items", () => {
         });
     });
   });
+
+  describe(`DELETE ${PATH}/:id`, () => {
+    it("should delete a given resource", done => {
+      chai
+        .request(server)
+        .del(`${PATH}/1`)
+        .end((err, res) => {
+          should.not.exist(err);
+          res.status.should.eql(204);
+          done();
+        });
+    });
+  });
 });
